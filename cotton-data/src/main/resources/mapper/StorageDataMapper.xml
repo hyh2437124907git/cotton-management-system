@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hyh.model.mapper.StorageDataMapper">
+    <update id="save">insert storage_data values(#{id},#{warehouse.id},#{cotton.id},#{weight})</update>
+    <update id="updateWeight">update storage_data set weight = #{weight} where warehouse_id = #{warehouse.id} and cotton_id = #{cotton.id}</update>
+
+    <select id="getByWarehouseIdAndCottonId" resultMap="storageData" >
+        select * from storage_data where warehouse_id = #{warehouseId} and cotton_id = #{cottonId}
+    </select>
+    <resultMap id="storageData" type="com.hyh.model.entity.StorageData">
+        <association property="warehouse" column="warehouse_id" javaType="com.hyh.model.entity.Warehouse" select="getWarehouseById"/>
+        <association property="cotton" column="cotton_id" javaType="com.hyh.model.entity.Cotton" select="getCottonById"/>
+    </resultMap>
+
+    <select id="getWarehouseById" resultType="com.hyh.model.entity.Warehouse">select *from warehouse where id = #{warehouseId}</select>
+    <select id="getCottonById" resultType="com.hyh.model.entity.Cotton">select *from cotton where id = #{cottonId}</select>
+</mapper>

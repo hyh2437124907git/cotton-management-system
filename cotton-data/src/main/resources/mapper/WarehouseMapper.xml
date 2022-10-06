@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hyh.model.mapper.WarehouseMapper">
+    <update id="save">insert warehouse values(#{id},#{code},#{totalCapacity},#{idle},#{remainingCapacity},#{location})</update>
+    <update id="updateRemainingCapacity">update warehouse set remaining_capacity = #{remainingCapacity}</update>
+    <delete id="delById">delete from warehouse where id = #{id}</delete>
+    <select id="getById" resultType="com.hyh.model.entity.Warehouse">select *from warehouse where id = #{id}</select>
+    <select id="getAll" resultType="com.hyh.model.entity.Warehouse">select *from warehouse</select>
+    <select id="getByWarehouse" resultType="com.hyh.model.entity.Warehouse"></select>
+</mapper>
